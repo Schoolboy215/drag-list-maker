@@ -1,0 +1,24 @@
+/**
+ * src/styles/tailwind.css
+ *
+ * Tailwind utilities alongside Vuetify. Preflight (Tailwind's CSS reset) is
+ * left out because Vuetify ships its own reset. Layer order is declared in
+ * public/layers.css.
+ */
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+/* Scan only the app source, not node_modules. */
+@source '../';
+
+/* Map Vuetify theme colours so `bg-primary`, `bg-surface`, `border-divider`
+   etc. follow the active Vuetify theme (light/dark). */
+@theme inline {
+  --color-primary: rgb(var(--v-theme-primary));
+  --color-secondary: rgb(var(--v-theme-secondary));
+  --color-surface: rgb(var(--v-theme-surface));
+  --color-on-surface: rgb(var(--v-theme-on-surface));
+  --color-background: rgb(var(--v-theme-background));
+  --color-divider: rgba(var(--v-border-color), var(--v-border-opacity));
+}
