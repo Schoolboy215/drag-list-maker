@@ -5,7 +5,7 @@
 
   type Kinds = { type: 'item', value: ID }
 
-  const { id, dnd } = defineProps<{
+  const { id, label, dnd } = defineProps<{
     id: ID
     label: string
     dnd: DragDropContext<Kinds>

@@ -17,7 +17,13 @@ import App from './App.vue'
 import 'unfonts.css'
 import '@/styles/tailwind.css'
 
+import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
+const pinia = createPinia()
 const app = createApp(App)
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia)
 
 registerPlugins(app)
 
