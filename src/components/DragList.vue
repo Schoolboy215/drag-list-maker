@@ -1,14 +1,15 @@
 <script setup lang="ts">
   import { createSortable, useDragDrop, useProxyRegistry } from '@vuetify/v0'
-  import { computed, onBeforeUnmount, toRef, useTemplateRef } from 'vue'
+  import { computed, onBeforeUnmount, toRef, useTemplateRef, ref } from 'vue'
 
-  import type { ID, SortableTicketInput } from '@vuetify/v0'
+  import { type ID, type SortableTicketInput, PointerAdapter } from '@vuetify/v0'
 
   import DraggableItem from './DraggableItem.vue'
   import NewItemDialog from './NewItemDialog.vue'
 
   import { type Item } from '../interfaces/Item.ts'
   import { useStore } from '@/stores/main.ts'
+import ItemDetailsDialog from './ItemDetailsDialog.vue'
 
   interface ItemTicket extends SortableTicketInput {
     value: Item
@@ -16,7 +17,9 @@
 
   type Kinds = { type: 'item', value: ID }
 
-  const dnd = useDragDrop<Kinds>()
+  const dnd = useDragDrop<Kinds>({
+    adapters : [new PointerAdapter({threshold: 5})]
+  })
   const sortable = createSortable<ItemTicket>()
   const mainStore = useStore()
 
@@ -92,10 +95,19 @@
   }
   function deleteItem(itemId: string)
   {
+    detailsOpen.value = false
     var idx = mainStore.elements.findIndex((element) => element.id == itemId)
     mainStore.elements.splice(idx,1)
     const ticketToDelete = sortable.values().find(t => t.value?.id == itemId)
     if (ticketToDelete) sortable.unregister(ticketToDelete.id)
+  }
+  const selectedId = ref<string | null>(null)
+  const selectedItem = computed(() => mainStore.elements.find(e => e.id === selectedId.value))
+  const detailsOpen = ref(false)
+  function openItem(itemId: string)
+  {
+    selectedId.value = itemId
+    detailsOpen.value = true
   }
 
 </script>
@@ -103,37 +115,39 @@
 <template>
   <v-container class="fill-height d-flex flex-column justify-center" max-width="1100">
     <div ref="outer" class="relative">
-    <ul
-      ref="container"
-      class="flex flex-col gap-1 data-[dragging]:cursor-grabbing"
-      :data-dragging="dnd.isDragging.value || undefined"
-    >
-      <TransitionGroup name="list">
-        <DraggableItem
-          v-for="ticket in proxy.values"
-          :id="ticket.id"
-          :key="ticket.id"
-          :dnd
-          :label="ticket.value!.label"
-          :guid="ticket.value!.id"
-          @deleted="deleteItem"
-        />
-      </TransitionGroup>
-    </ul>
+      <ul
+        ref="container"
+        class="flex flex-col gap-1 data-[dragging]:cursor-grabbing"
+        :data-dragging="dnd.isDragging.value || undefined"
+      >
+        <TransitionGroup name="list">
+          <DraggableItem
+            v-for="ticket in proxy.values"
+            :id="ticket.id"
+            :key="ticket.id"
+            :dnd
+            :label="ticket.value!.label"
+            :guid="ticket.value!.id"
+            @deleted="deleteItem"
+            @opened="openItem"
+          />
+        </TransitionGroup>
+      </ul>
 
-    <div
-      v-if="indicatorIndex !== null"
-      aria-hidden="true"
-      class="indicator pointer-events-none absolute z-10 h-0.5 rounded-full bg-primary"
-      :style="indicatorStyle"
-    />
-  </div>
-  <v-container>
-    <v-row>
-    <NewItemDialog @submitted="addItem"/>
-    <v-btn @click="clearList">Reset</v-btn>
-    </v-row>
-  </v-container>
+      <div
+        v-if="indicatorIndex !== null"
+        aria-hidden="true"
+        class="indicator pointer-events-none absolute z-10 h-0.5 rounded-full bg-primary"
+        :style="indicatorStyle"
+      />
+    </div>
+    <ItemDetailsDialog v-model:open="detailsOpen" :item="selectedItem" @deleted="deleteItem"/>
+    <v-container>
+      <v-row>
+      <NewItemDialog @submitted="addItem"/>
+      <v-btn @click="clearList">Reset</v-btn>
+      </v-row>
+    </v-container>
   </v-container>
 </template>
 

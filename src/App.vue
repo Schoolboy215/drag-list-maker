@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <HelloWorld />
+      <DragList />
     </v-main>
     <v-btn
       class="ma-2"
@@ -14,5 +14,5 @@
 </template>
 
 <script lang="ts" setup>
-  import HelloWorld from '@/components/HelloWorld.vue'
+  import DragList from '@/components/DragList.vue'
 </script>

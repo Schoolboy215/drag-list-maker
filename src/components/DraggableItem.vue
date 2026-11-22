@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { onBeforeUnmount, useTemplateRef } from 'vue'
 
-  import type { DragDropContext, ID } from '@vuetify/v0'
+  import type { DragDropContext, ID, Dialog, DialogRoot, DialogActivator } from '@vuetify/v0'
 
   type Kinds = { type: 'item', value: ID }
 
@@ -20,12 +20,15 @@
     value: id,
   })
 
-  const emit = defineEmits(['deleted'])
+  const emit = defineEmits(['deleted', 'opened'])
 
   onBeforeUnmount(() => ticket.unregister())
 
   function deleteSelf() {
     emit('deleted', guid);
+  }
+  function openSelf() {
+    emit('opened', guid)
   }
 </script>
 
@@ -37,7 +40,8 @@
     data-draggable
     :data-dragging="ticket.isDragging.value || undefined"
     tabindex="0"
+    @click="openSelf"
   >
-    <v-row><v-col><span>{{ label }}</span></v-col><v-btn @click="deleteSelf" color="red">x</v-btn></v-row>
+    <v-row><v-col><span>{{ label }}</span></v-col></v-row>
   </li>
 </template>
