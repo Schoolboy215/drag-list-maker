@@ -5,8 +5,9 @@
 
   type Kinds = { type: 'item', value: ID }
 
-  const { id, label, dnd } = defineProps<{
+  const { id, guid, label, dnd } = defineProps<{
     id: ID
+    guid: string
     label: string
     dnd: DragDropContext<Kinds>
   }>()
@@ -19,7 +20,13 @@
     value: id,
   })
 
+  const emit = defineEmits(['deleted'])
+
   onBeforeUnmount(() => ticket.unregister())
+
+  function deleteSelf() {
+    emit('deleted', guid);
+  }
 </script>
 
 <template>
@@ -31,6 +38,6 @@
     :data-dragging="ticket.isDragging.value || undefined"
     tabindex="0"
   >
-    <span>{{ label }}</span>
+    <v-row><v-col><span>{{ label }}</span></v-col><v-btn @click="deleteSelf" color="red">x</v-btn></v-row>
   </li>
 </template>

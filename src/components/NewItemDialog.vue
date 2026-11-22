@@ -9,14 +9,15 @@ const url = defineModel('url')
 
 <template>
     <div class="flex justify-center">
-        <Dialog.Root>
+        <Dialog.Root v-slot="{ close }">
             <Dialog.Activator class="px-4 py-2 bg-primary text-on-primary rounded-md">
+                Add item
                 <Dialog.Content class="m-auto rounded-xl bg-surface border border-divider max-w-md w-full">
                     <Dialog.Title>Add new item to list</Dialog.Title>
                     <Dialog.Description>Specify details</Dialog.Description>
                     <v-text-field v-model="label" label="Label" variant="underlined"></v-text-field>
                     <v-text-field v-model="url" label="Url" variant="underlined"></v-text-field>
-                    <v-btn @click="$emit('submitted', label, url)">Submit</v-btn>
+                    <v-btn @click="$emit('submitted', label, url); close()">Add</v-btn>
                 </Dialog.Content>
             </Dialog.Activator>
         </Dialog.Root>

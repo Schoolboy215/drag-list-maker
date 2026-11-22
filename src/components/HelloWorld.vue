@@ -90,6 +90,13 @@
     mainStore.$reset()
     sortable.onboard(mainStore.elements.map(value => ({ value })))
   }
+  function deleteItem(itemId: string)
+  {
+    var idx = mainStore.elements.findIndex((element) => element.id == itemId)
+    mainStore.elements.splice(idx,1)
+    const ticketToDelete = sortable.values().find(t => t.value?.id == itemId)
+    if (ticketToDelete) sortable.unregister(ticketToDelete.id)
+  }
 
 </script>
 
@@ -108,6 +115,8 @@
           :key="ticket.id"
           :dnd
           :label="ticket.value!.label"
+          :guid="ticket.value!.id"
+          @deleted="deleteItem"
         />
       </TransitionGroup>
     </ul>
