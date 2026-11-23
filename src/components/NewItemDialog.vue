@@ -3,8 +3,8 @@ import { Dialog } from '@vuetify/v0';
 import { ref, watch } from 'vue'
 
 const emit = defineEmits(['submitted'])
-const label = defineModel('label')
-const url = defineModel('url')
+const label = ref('label')
+const url = ref('url')
 
 const open = ref(false)
 watch(open, (isOpen) => {

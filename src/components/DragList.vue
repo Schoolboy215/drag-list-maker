@@ -9,7 +9,8 @@
 
   import { type Item } from '../interfaces/Item.ts'
   import { useStore } from '@/stores/main.ts'
-import ItemDetailsDialog from './ItemDetailsDialog.vue'
+  import ItemDetailsDialog from './ItemDetailsDialog.vue'
+  import DeleteConfirmationDialog from './DeleteConfirmationDialog.vue'
 
   interface ItemTicket extends SortableTicketInput {
     value: Item
@@ -145,7 +146,7 @@ import ItemDetailsDialog from './ItemDetailsDialog.vue'
     <v-container>
       <v-row>
       <NewItemDialog @submitted="addItem"/>
-      <v-btn @click="clearList">Reset</v-btn>
+      <DeleteConfirmationDialog @deleted="clearList" detail-text="This will clear your localStorage for this site.">Reset</DeleteConfirmationDialog>
       </v-row>
     </v-container>
   </v-container>
