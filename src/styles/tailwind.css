@@ -21,4 +21,5 @@
   --color-on-surface: rgb(var(--v-theme-on-surface));
   --color-background: rgb(var(--v-theme-background));
   --color-divider: rgba(var(--v-border-color), var(--v-border-opacity));
+  --font-serif: 'Aleo Variable', serif;
 }

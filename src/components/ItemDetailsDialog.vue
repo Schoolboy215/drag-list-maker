@@ -15,13 +15,11 @@ function deleteSelf()
 </script>
 
 <template>
-    <div class="flex justify-center">
-        <Dialog.Root v-model="open">
-            <Dialog.Content class="m-auto rounded-xl bg-surface border border-divider max-w-md w-full">
-                <Dialog.Title>{{ item?.label }}</Dialog.Title>
-                <Dialog.Description><a v-bind:href=item?.url target="_blank">{{item?.url}}</a></Dialog.Description>
-                <DeleteConfirmationDialog @deleted="deleteSelf">Delete</DeleteConfirmationDialog>
-            </Dialog.Content>
-        </Dialog.Root>
-    </div>
+    <Dialog.Root v-model="open">
+        <Dialog.Content class="m-auto rounded-xl bg-surface border border-divider max-w-md w-full">
+            <Dialog.Title>{{ item?.label }}</Dialog.Title>
+            <Dialog.Description><a v-bind:href=item?.url target="_blank">{{item?.url}}</a></Dialog.Description>
+            <DeleteConfirmationDialog @deleted="deleteSelf">Delete</DeleteConfirmationDialog>
+        </Dialog.Content>
+    </Dialog.Root>
 </template>

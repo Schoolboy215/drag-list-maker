@@ -1,75 +1,19 @@
 # drag-list-maker
 
+A simple tool to let you create a list of items and reorder them by dragging. Use it to keep track of a list of shows you want to watch or recipes you want to make. Items have an optional URL field that can take you to some external information.
+
+## All local, no account
+Data about your list is saved on your device only, in local storage. Nothing goes to any server and there are no accounts
+
+## Usage tips
+* Drag an item to change its position in the list
+* Click an item to view its details or delete it
+* Click the "Reset" button to clear your list and start over
+
+## Stack
+
 Scaffolded with Vuetify CLI.
-
-## ❗️ Documentation
-
-- Primary docs: https://vuetifyjs.com/
-- Getting started guide: https://vuetifyjs.com/en/getting-started/installation/
-- Community support: https://community.vuetifyjs.com/
-- Issue tracker: https://issues.vuetifyjs.com/
-
-## 🧱 Stack
-
 - Framework: Vue 3 + Vite
 - UI Library: Vuetify
 - Language: TypeScript
 - Package manager: npm
-
-## 🧭 Start Here
-
-- Main entry: `src/main.ts`
-- Main app component: `src/App.vue`
-- Main styles: `src/styles/`
-- Plugin setup: `src/plugins/`
-
-## 📁 Project Structure
-
-- `src/main.ts` — application entry point
-- `src/App.vue` — root component
-- `src/components/` — reusable Vue components
-- `src/plugins/` — plugin registration and setup
-- `src/styles/` — global styles and theme settings
-- `public/` — static public files
-
-## ✨ Enabled Features
-
-- Base setup
-
-## 💿 Install
-
-Use your selected package manager (npm) to install dependencies:
-
-```bash
-npm install
-```
-
-## 🚀 Quick Start
-
-```bash
-npm install
-npm run dev
-```
-
-## 🏗️ Build
-
-```bash
-npm run build
-```
-
-## 🧪 Available Scripts
-
-- `npm run dev`
-- `npm run build`
-- `npm run preview`
-- `npm run build-only`
-- `npm run type-check`
-
-## 💪 Support Vuetify Development
-
-This project uses Vuetify - an MIT licensed Open Source project. We are glad to welcome contributors and any support for ongoing development:
-
-- Contribute to Vuetify and ecosystem projects: https://github.com/vuetifyjs
-- Request enterprise support: https://support.vuetifyjs.com/
-- Sponsor on GitHub: https://github.com/sponsors/vuetifyjs
-- Support on Open Collective: https://opencollective.com/vuetify

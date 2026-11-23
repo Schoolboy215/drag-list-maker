@@ -42,6 +42,6 @@
     tabindex="0"
     @click="openSelf"
   >
-    <v-row><v-col><span>{{ label }}</span></v-col></v-row>
+    <span>{{ label }}</span>
   </li>
 </template>

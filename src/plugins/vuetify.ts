@@ -14,5 +14,22 @@ import 'vuetify/styles'
 export default createVuetify({
   theme: {
     defaultTheme: 'system',
+    themes: {
+      light: {
+        colors: {
+          primary: '#23AEFF',
+          secondary: '#625B71',
+          error: '#FF3A6F'
+          // background, surface, error, info, success, warning...
+        },
+      },
+      dark: {
+        colors: {
+          primary: '#87cef7',
+          secondary: '#CCC2DC',
+          error: '#FF82B6'
+        },
+      },
+    },
   },
 })

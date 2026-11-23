@@ -114,11 +114,12 @@
 </script>
 
 <template>
-  <v-container class="fill-height d-flex flex-column justify-center" max-width="1100">
+  <v-container class="fill-height d-flex flex-column pt-12" max-width="600">
+    <h2 class="mb-3 px-3 text-2xl font-semibold">Your personal list</h2>
     <div ref="outer" class="relative">
       <ul
         ref="container"
-        class="flex flex-col gap-1 data-[dragging]:cursor-grabbing"
+        class="m-0 flex list-none flex-col gap-1 p-0 data-[dragging]:cursor-grabbing"
         :data-dragging="dnd.isDragging.value || undefined"
       >
         <TransitionGroup name="list">
@@ -143,12 +144,10 @@
       />
     </div>
     <ItemDetailsDialog v-model:open="detailsOpen" :item="selectedItem" @deleted="deleteItem"/>
-    <v-container>
-      <v-row>
+    <div class="mt-4 flex justify-end gap-2">
       <NewItemDialog @submitted="addItem"/>
       <DeleteConfirmationDialog @deleted="clearList" detail-text="This will clear your localStorage for this site.">Reset</DeleteConfirmationDialog>
-      </v-row>
-    </v-container>
+    </div>
   </v-container>
 </template>
 
